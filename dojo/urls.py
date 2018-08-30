@@ -2,8 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^sum/(?P<x>\d+)/$', views.mysum),
-    url(r'^sum/(?P<x>\d+)/(?P<y>\d+)/$', views.mysum),
-    url(r'^sum/(?P<x>\d+)/(?P<y>\d+)/(?P<z>\d+)/$', views.mysum),
-    url(r'^hello/(?P<name>[ㄱ-힣A-z\d]+/$)', views.myname)
+    url(r'^sum/(?P<numbers>[\d/]+)/$', views.mysum),
+    url(r'^hello/$', views.myname),
+    url(r'^hello/(?P<name>[a-zA-Zㄱ-힣]+)/(?P<age>[\d]+)/$', views.myname),
 ]
