@@ -32,9 +32,17 @@ class Post(models.Model):
     class Meta:
         ordering = ['-id']
 
-
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=True)
+    author = models.CharField(max_length=50, verbose_name='작성자')
+    message = models.TextField(verbose_name='내용')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 
 

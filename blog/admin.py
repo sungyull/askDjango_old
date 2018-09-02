@@ -1,7 +1,7 @@
 # blog/asmin.py
 
 from django.contrib import admin
-from blog.models import Post
+from blog.models import Post, Comment
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -30,5 +30,8 @@ class PostAdmin(admin.ModelAdmin):
     make_published.short_description = '지정 포스팅을 퍼블리쉬 상태로 변경'
     make_draft.short_description = '지정 포스팅을 Draft 상태로 변경'
 
-
 # admin.site.register(Post,PostAdmin)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
