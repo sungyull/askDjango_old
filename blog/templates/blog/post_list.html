@@ -7,9 +7,28 @@
 </head>
 <body>
     <p>안녕하세요.... 어쩌고 저쩌고... </p>
+
+    <form action="" method="get">
+        <input type="text" name="q" value="{{query}}" />
+        <input type="submit" value="검색">
+    </form>
+
+    <ul>
+    {% for post in post_list %}
+        <li>
+            {{post.id}}.
+            {{post.title}}
+            <small> by {{post.author}}</small>
+            <small> at - {{post.updated_at}}</small>
+        </li>
+    {% endfor %}
+    </ul>
+
     <h1>
         Using the URLconf defined in askdjango.urls, Django tried these URL patterns, in this order:
         The empty path didn't match any of these.
     </h1>
+
+
 </body>
 </html>
