@@ -3,6 +3,7 @@ import re
 from django.db import models
 from django.forms import ValidationError
 from django.utils import timezone
+from django.conf import settings
 
 
 def lnglat_validator(value):
@@ -17,7 +18,8 @@ class Post(models.Model):
         ('w', 'Withdram')
     )
 
-    author = models.CharField(max_length=50, verbose_name='작성자')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=True)
+    # author = models.CharField(max_length=50, verbose_name='작성자')
     title = models.CharField(max_length=100, verbose_name='제목',
                              help_text="""포스팅 제목을 입력해주세요. 최대 100자""")
     content = models.TextField(verbose_name='내용')
@@ -26,6 +28,7 @@ class Post(models.Model):
         validators=[lnglat_validator],
         help_text = '위도,경도')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    tag_set = models.ManyToManyField('Tag', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -42,6 +45,12 @@ class Comment(models.Model):
     message = models.TextField(verbose_name='내용')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
 
 
 

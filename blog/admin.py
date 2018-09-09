@@ -1,7 +1,7 @@
 # blog/asmin.py
 
 from django.contrib import admin
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Tag
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -34,4 +34,15 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
+    list_display = ['post','author','message','created_at', 'updated_at']
+    list_display_links = ['post', 'message']
+    list_filter = ['post','created_at']
     pass
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display=['name']
+
+
+
+
