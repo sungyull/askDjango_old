@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=2.0">
-    <title>안녕하세요.... </title>
-</head>
-<body>
+{% extends "blog/layout.html"%}
+
+{% block title%}
+    Post List!!!
+{% endblock%}
+
+{% block content%}
     <p>안녕하세요.... 어쩌고 저쩌고... </p>
 
     <form action="" method="get">
@@ -29,7 +28,4 @@
         Using the URLconf defined in askdjango.urls, Django tried these URL patterns, in this order:
         The empty path didn't match any of these.
     </h1>
-
-
-</body>
-</html>
+{% endblock %}

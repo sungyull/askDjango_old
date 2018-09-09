@@ -1,0 +1,16 @@
+{% extends "accounts/layout.html"%}
+
+{% block title%}
+    Profile List!!!
+{% endblock%}
+
+{% block content%}
+    <h2>
+        {{user}}'s Profile
+    </h2>
+    <u1>
+        <li>사용자명:{{user.username}}</li>
+        <li>email:{{user.emal}}</li>
+        <li>가입날짜:{{user.date_joined}}</li>
+    </u1>
+{% endblock %}
