@@ -15,17 +15,15 @@
     <ul>
     {% for post in post_list %}
         <li>
-            {{post.id}}.
-            <a href="/blog/{{post.id}}/">{{post.title}}</a>
-
+            {{post.id}}
+            <a href="{% url 'blog:post_detail' post.id %}">
+                {{post.title}}
+            </a>
+            <!--<a href="/blog/{{post.id}}/">{{post.title}}</a>-->
             <small> by {{post.author}}</small>
             <small> at - {{post.updated_at}}</small>
         </li>
     {% endfor %}
     </ul>
 
-    <h1>
-        Using the URLconf defined in askdjango.urls, Django tried these URL patterns, in this order:
-        The empty path didn't match any of these.
-    </h1>
 {% endblock %}

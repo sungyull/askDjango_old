@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^$', include('blog.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^blog/', include('blog.urls')),
+    url(r'^blog/', include(('blog.urls','blog'), namespace='blog')),
     url(r'^dojo/', include('dojo.urls')),
     url(r'^shop/', include('shop.urls')),
 ]
