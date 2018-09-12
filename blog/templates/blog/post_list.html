@@ -5,26 +5,41 @@
 {% endblock%}
 
 {% block content%}
-    <p>안녕하세요.... 어쩌고 저쩌고... </p>
 
-    <form action="" method="get">
-        <input type="text" name="q" value="{{query}}" />
-        <input type="submit" value="검색">
-    </form>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Django Template <sup>by SungYull</sup></h1>
+            <p>파이썬, 장고... 간단 쇼핑몰 만들기...</p>
+            <p>
+                <a class="btn btn-lg btn-primary" href="http://facebook.com/groups/askdjango">
+                AskDjango 페이스북 그룹 &raquo;
+                </a>
+            </p>
+        </div>
+    </div>
 
-    <ul>
-    {% for post in post_list %}
-        <li>
-            {{post.id}}
-            <a href="{% url "blog:post_detail" post.id %}">
-                {{post.title}}
-            </a>
-            
-            <!--<a href="/blog/{{post.id}}/">{{post.title}}</a>-->
-            <small> by {{post.author}}</small>
-            <small> at - {{post.updated_at}}</small>
-        </li>
-    {% endfor %}
-    </ul>
+    <div class="row">
+        <div class="col-am-12">
+            <form action="" method="get">
+                <input type="text" name="q" value="{{query}}" />
+                <input type="submit" value="검색">
+            </form>
+            <table>
+
+                {% for post in post_list %}
+                <tr>
+                    <td>{{post.id}}</td>
+                    <td><a href="{% url "blog:post_detail" post.id %}">
+                        {{post.title}}
+                        </a>
+                    </td>
+                    <td><small> by {{post.author}}</small></td>
+                    <td><small> at - {{post.updated_at}}</small></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
 
 {% endblock %}
