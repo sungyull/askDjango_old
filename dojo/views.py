@@ -1,31 +1,28 @@
 import os
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from .forms import PostForm
 from .models import Post
+
 
 def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            # case 1
             '''
+            # case 1
             post = Post()
             post.title = form.cleaned_data['title']
             post.content = form.cleaned_data['content']
             post.save()
-            '''
 
             # case 2
-            '''
             post = Post(title = form.cleaned_data['title'],
                         content = form.cleaned_data['content'])
             post.save()
-            '''
 
             # case 3
-            '''
             post = Post.objects.create(title = form.cleaned_data['title'],
                         content = form.cleaned_data['content'])
             '''
@@ -40,6 +37,25 @@ def post_new(request):
             form.errors
     else:
         form = PostForm()
+    return render(request, 'dojo/post_form.html', {'form':form,})
+
+
+# 인자값 id 받아서 수정폼 화면 자동 생성
+def post_edit(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = Post(**form.cleaned_data)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
+
+            return redirect('/dojo/')
+        else:
+            form.errors
+    else:
+        form = PostForm(instance=post)
     return render(request, 'dojo/post_form.html', {'form':form,})
 
 
@@ -75,7 +91,7 @@ def post_list3(request):
 
 
 def excel_down(request):
-    #filepath = """D:/DJHome/askDjango/dojo/tests.xls"""
+    # filepath = """D:/DJHome/askDjango/dojo/tests.xls"""
     filepath = os.path.join(settings.BASE_DIR, 'tests.xls')
     filename = os.path.basename(filepath)
     with open(filepath, 'rb') as f:

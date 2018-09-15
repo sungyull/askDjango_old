@@ -20,7 +20,6 @@ class Post(models.Model):
     )
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    # author = models.CharField(max_length=50, verbose_name='작성자')
     title = models.CharField(max_length=100, verbose_name='제목',
                              help_text="""포스팅 제목을 입력해주세요. 최대 100자""")
     content = models.TextField(verbose_name='내용')

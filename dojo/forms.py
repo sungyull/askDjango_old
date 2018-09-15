@@ -8,6 +8,12 @@ def min_len_3_validator(value):
         raise forms.ValidationError('3글자 이상 입력 요망!!!')
 
 
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']
+
+
 # class PostForm(forms.Form):
 #     title = forms.CharField(validators=[min_len_3_validator])
 #     content = forms.CharField(widget=forms.Textarea())
@@ -19,9 +25,5 @@ def min_len_3_validator(value):
 #         return post
 
 
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ['title', 'content']
 
 
