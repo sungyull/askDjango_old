@@ -11,7 +11,10 @@ def min_len_3_validator(value):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content' ]
+        widgets = {
+            'user_agent': forms.HiddenInput,
+        }
 
 
 class GameUserForm(forms.ModelForm):
