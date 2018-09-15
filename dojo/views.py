@@ -1,7 +1,46 @@
 import os
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from .forms import PostForm
+from .models import Post
+
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            # case 1
+            '''
+            post = Post()
+            post.title = form.cleaned_data['title']
+            post.content = form.cleaned_data['content']
+            post.save()
+            '''
+
+            # case 2
+            '''
+            post = Post(title = form.cleaned_data['title'],
+                        content = form.cleaned_data['content'])
+            post.save()
+            '''
+
+            # case 3
+            '''
+            post = Post.objects.create(title = form.cleaned_data['title'],
+                        content = form.cleaned_data['content'])
+            '''
+
+            # case 4
+            post = Post(**form.cleaned_data)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
+
+            return redirect('/dojo/')
+        else:
+            form.errors
+    else:
+        form = PostForm()
+    return render(request, 'dojo/post_form.html', {'form':form,})
 
 
 def mysum(request, numbers):
