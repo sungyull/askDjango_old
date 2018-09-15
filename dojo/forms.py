@@ -3,6 +3,7 @@
 from django import forms
 from .models import Post, GameUser
 
+
 def min_len_3_validator(value):
     if len(value) < 3:
         raise forms.ValidationError('3글자 이상 입력 요망!!!')
@@ -11,7 +12,7 @@ def min_len_3_validator(value):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content' ]
+        fields = ['title', 'content', 'user_agent' ]
         widgets = {
             'user_agent': forms.HiddenInput,
         }

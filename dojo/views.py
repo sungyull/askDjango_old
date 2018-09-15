@@ -7,8 +7,10 @@ from .models import Post
 
 
 def post_new(request):
+
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
+
         if form.is_valid():
             '''
             # case 1
@@ -35,8 +37,11 @@ def post_new(request):
             return redirect('/dojo/')
         else:
             form.errors
+            print("==s==========> post_new {}".format(form.errors))
+
     else:
         form = PostForm()
+        print("============> post_new GET")
     return render(request, 'dojo/post_form.html', {'form':form,})
 
 
