@@ -1,7 +1,7 @@
 # dojo/forms.py
 
 from django import forms
-from .models import Post
+from .models import Post, GameUser
 
 def min_len_3_validator(value):
     if len(value) < 3:
@@ -12,6 +12,16 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content']
+
+
+class GameUserForm(forms.ModelForm):
+    class Meta:
+        model = GameUser
+        fields = ['server_name', 'username']
+
+    def clean_username(self):
+        return self.cleaned_data.get('username', '').split()
+
 
 
 # class PostForm(forms.Form):

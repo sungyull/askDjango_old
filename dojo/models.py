@@ -1,6 +1,7 @@
 # dojo/models.py
 
 from django import forms
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 
@@ -16,3 +17,16 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
+class GameUser(models.Model):
+    server_name = models.CharField(max_length=10, choices=(
+                                                    ('A', 'A서버'),
+                                                    ('B', 'B서버'),
+                                                    ('C', 'C서버'),
+                                                ))
+    username = models.CharField(max_length=20, validators=[MinLengthValidator(3,message='username은 3글자 이상 입력하세요!!!')])
+
+    class Meta:
+        unique_together = [
+            ('server_name', 'username'),
+        ]

@@ -3,6 +3,7 @@
 from django.contrib import admin
 from blog.models import Post, Comment, Tag
 
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ['id','status', 'title', 'content_size', 'created_at', 'updated_at']
@@ -32,12 +33,13 @@ class PostAdmin(admin.ModelAdmin):
 
 # admin.site.register(Post,PostAdmin)
 
+
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['post','author','message','created_at', 'updated_at']
     list_display_links = ['post', 'message']
     list_filter = ['post','created_at']
-    pass
+
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
