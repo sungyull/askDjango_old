@@ -1,0 +1,7 @@
+/* blog/static/blog/style.css */
+
+{{ BASE_DIR }}
+
+body{
+    background-color: aliceblue;
+}
